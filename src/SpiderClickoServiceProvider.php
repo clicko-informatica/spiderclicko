@@ -13,7 +13,7 @@ class SpiderClickoServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->make('Clicko\SpiderClicko\SpiderClickoController');
+
     }
 
     /**
@@ -23,7 +23,6 @@ class SpiderClickoServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadRoutesFrom(__DIR__.'/routes.php');
         $this->loadMigrationsFrom(__DIR__.'/migrations');
         $this->commands([
             InstallCommand::class,

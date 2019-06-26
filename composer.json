@@ -10,9 +10,11 @@
         "php": ">=7.0",
         "guzzlehttp/guzzle": "^6.3"
     },
-     "autoload": {
+    "autoload": {
         "psr-4": {
             "Clicko\\SpiderClicko\\": "src/"
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
