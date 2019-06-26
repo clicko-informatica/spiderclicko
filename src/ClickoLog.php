@@ -4,13 +4,11 @@ namespace Clicko\SpiderClicko;
 
 class ClickoLog
 {
-    private $accesToken;
-
-    public function register($user, $pass, $phrasepass)
+    public function register($user, $pass, $passphrase)
     {
         $clickoLogApi = new ClickoLogApi();
 
-        $token = $clickoLogApi->register($user, $pass, $phrasepass);
+        $token = $clickoLogApi->register($user, $pass, $passphrase);
 
         if ($token->message=="Incorrect PassPhrase!"){
             return $token->message;
@@ -19,7 +17,7 @@ class ClickoLog
 
             $spiderClickoCredentials->user = $user;
             $spiderClickoCredentials->pass = $pass;
-            $spiderClickoCredentials->passphrase = $phrasepass;
+            $spiderClickoCredentials->passphrase = $passphrase;
             $spiderClickoCredentials->access_token = $token->access_token;
             $spiderClickoCredentials->expires_at = $token->expires_at;
 
@@ -30,7 +28,7 @@ class ClickoLog
         }
     }
 
-    static function saveLog($exception){
+    private static function saveLog($payload, $type){
         $spiderClickoCredentials = SpiderClickoCredentials::first();
         $clickoLogApi = new ClickoLogApi();
 
@@ -43,6 +41,13 @@ class ClickoLog
         }
 
         $user= \Auth::check() ? \Auth::user()->id : null;
+
+        if (!$clickoLogApi->saveLog(['user' => $user, 'payload' => $payload, 'type' => $type], $spiderClickoCredentials->access_token)){
+            logger('Error al guardar el Clicko Log.');
+        }
+    }
+
+    static function exception($exception){
         $payload= json_encode([
             'message' => $exception->getMessage(),
             'code' => $exception->getCode(),
@@ -51,8 +56,38 @@ class ClickoLog
             'trace' => $exception->getTraceAsString(),
         ]);
 
-        if (!$clickoLogApi->saveLog(['user' => $user, 'payload' => $payload, 'type' => 'Exception' ], $spiderClickoCredentials->access_token)){
-            logger('Error al guardar el Clicko Log.');
-        }
+        self::saveLog($payload, 'Exception');
+    }
+
+    static function error($message){
+        $payload= json_encode([
+            'message' => $message,
+        ]);
+
+        self::saveLog($payload, 'Error');
+    }
+
+    static function info($message){
+        $payload= json_encode([
+            'message' => $message,
+        ]);
+
+        self::saveLog($payload, 'Info');
+    }
+
+    static function notice($message){
+        $payload= json_encode([
+            'message' => $message,
+        ]);
+
+        self::saveLog($payload, 'Notice');
+    }
+
+    static function success($message){
+        $payload= json_encode([
+            'message' => $message,
+        ]);
+
+        self::saveLog($payload, 'Success');
     }
 }

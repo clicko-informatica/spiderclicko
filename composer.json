@@ -1,5 +1,7 @@
 {
     "name": "clicko/spiderclicko",
+    "description": "Sistema de Logs para las Aplicaciones/Webs de Clicko",
+    "license": "MIT",
     "authors": [
         {
             "name": "Xavier",

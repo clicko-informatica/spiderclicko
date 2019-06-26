@@ -11,10 +11,10 @@ class ClickoLogApi
         $this->client = new Client();
     }
 
-    public function register($user, $pass, $phrasepass)
+    public function register($user, $pass, $passphrase)
     {
         try {
-            $response = $this->client->request('POST', 'laravelapi.local/api/auth/signup', [
+            $response = $this->client->request('POST', 'http://logger.clicko.es/api/auth/signup', [
                 'headers' => [
                     "Accept" => 'application/x-www-form-urlencoded',
                 ],
@@ -22,7 +22,7 @@ class ClickoLogApi
                     "nombre" => $user,
                     "password" => $pass,
                     "url" => url('/'),
-                    "phrasepass" => $phrasepass,
+                    "phrasepass" => $passphrase,
                 ]
             ]);
         } catch (TransferException $e) {
@@ -34,17 +34,17 @@ class ClickoLogApi
         return \GuzzleHttp\json_decode($response->getBody()->getContents());
     }
 
-    public function getToken($user, $pass, $phrasepass)
+    public function getToken($user, $pass, $passphrase)
     {
         try {
-            $response = $this->client->request('POST', 'laravelapi.local/api/auth/login', [
+            $response = $this->client->request('POST', 'http://logger.clicko.es/api/auth/login', [
                 'headers' => [
                     "Accept" => 'application/x-www-form-urlencoded',
                 ],
                 'form_params' => [
                     "nombre" => $user,
                     "password" => $pass,
-                    "phrasepass" => $phrasepass,
+                    "phrasepass" => $passphrase,
                 ]
             ]);
         } catch (TransferException $e) {
@@ -59,7 +59,7 @@ class ClickoLogApi
     public function saveLog($log, $accesToken)
     {
         try {
-            $response = $this->client->request('POST', 'laravelapi.local/api/auth/log/save', [
+            $response = $this->client->request('POST', 'http://logger.clicko.es/api/auth/log/save', [
                 'headers' => [
                     "Accept" => 'application/x-www-form-urlencoded',
                     "Authorization" => 'Bearer '.$accesToken,

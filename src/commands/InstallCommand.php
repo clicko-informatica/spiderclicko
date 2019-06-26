@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 
 class InstallCommand extends Command
 {
-    protected $signature = 'spiderclicko:install {--user=} {--pass=} {--phrasepass=}';
+    protected $signature = 'spiderclicko:install {--user=} {--pass=} {--passphrase=}';
 
     protected $description = 'Install package';
 
@@ -17,6 +17,6 @@ class InstallCommand extends Command
     public function handle() {
         $clickoLog = new ClickoLog();
 
-        $this->info($clickoLog->register($this->option('user'), $this->option('pass'), $this->option('phrasepass')));
+        $this->info($clickoLog->register($this->option('user'), $this->option('pass'), $this->option('passphrase')));
     }
 }

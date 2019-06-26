@@ -13,7 +13,7 @@ class SpiderClickoServiceProvider extends ServiceProvider
      */
     public function register()
     {
-
+        $this->app->make('Clicko\SpiderClicko\SpiderClickoController');
     }
 
     /**
