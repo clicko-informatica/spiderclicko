@@ -1,0 +1,13 @@
+{
+    "name": "clicko/spiderclicko",
+    "authors": [
+        {
+            "name": "Xavier",
+            "email": "xavier.raspall@clicko.es"
+        }
+    ],
+    "require": {
+        "php": ">=7.0",
+        "guzzlehttp/guzzle": "^6.3"
+    }
+}
