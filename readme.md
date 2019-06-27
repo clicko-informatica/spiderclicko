@@ -2,6 +2,14 @@
 
 ## Instalación
 
+Actualizar composer con el comando:
+
+    $ composer require clicko/spiderclicko
+    
+Si no funciona:
+
+    $ composer require "clicko/spiderclicko @dev"
+
 Después de actualizar composer, hacemos una migración para cargar la base de datos
 
     $ php artisan migrate
