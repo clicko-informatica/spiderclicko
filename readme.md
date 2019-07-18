@@ -14,6 +14,10 @@ Después de actualizar composer, hacemos una migración para cargar la base de d
 
     $ php artisan migrate
     
+Si ya hay una base de datos podemos llamar directamente a la migración para que haga la tabla nueva
+    
+    $ art migrate --path=/vendor/clicko/spiderclicko/src/migrations/
+    
 Una vez cargada la base de datos utilizamos el comando install del paquete con sus opciones correspondientes
 
     $ php artisan spiderclicko:install --user= --pass= --passphrase=
