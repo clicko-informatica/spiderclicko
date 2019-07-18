@@ -18,10 +18,6 @@ Si ya hay una base de datos podemos llamar directamente a la migración para que
     
     $ art migrate --path=/vendor/clicko/spiderclicko/src/migrations/
     
-Una vez cargada la base de datos utilizamos el comando install del paquete con sus opciones correspondientes
-
-    $ php artisan spiderclicko:install --user= --pass= --passphrase=
-    
 Agregamos el ServiceProvider a la matriz de proveedores en config / app.php
 
     Clicko\SpiderClicko\SpiderClickoServiceProvider::class,
@@ -29,6 +25,11 @@ Agregamos el ServiceProvider a la matriz de proveedores en config / app.php
 Opcionalmente podemos usar la facade para un código más corto. Añade esto a tus facades:
 
     'ClickoLog' => Clicko\SpiderClicko\ClickoLogFacade::class,
+    
+Una vez cargada la base de datos utilizamos el comando install del paquete con sus opciones correspondientes
+
+    $ php artisan spiderclicko:install --user= --pass= --passphrase=
+    
     
 ## Funciones
 
