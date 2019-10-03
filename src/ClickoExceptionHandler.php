@@ -34,13 +34,15 @@ class ClickoExceptionHandler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
-        try{
-            ClickoLog::exception($exception);
-        } catch (Exception $exception){
-            logger('Error al guardar la exception - Clicko Log');
-            logger($exception);
+        if (!$this->isHttpException($exception)){
+            try{
+                ClickoLog::exception($exception);
+            } catch (Exception $exception){
+                logger('Error al guardar la exception - Clicko Log');
+                logger($exception);
+            }
         }
-        
+
         parent::report($exception);
     }
 
