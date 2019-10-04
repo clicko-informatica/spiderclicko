@@ -23,4 +23,19 @@ class SpiderClickoCredentials extends Model
             return false;
         }
     }
+
+    public function getNameUser()
+    {
+        if (isset(\Auth::user()->login)){
+            return \Auth::user()->login;
+        } else if (isset(\Auth::user()->username)){
+            return \Auth::user()->username;
+        } else if (isset(\Auth::user()->name)){
+            return \Auth::user()->name;
+        } else if (isset(\Auth::user()->id)){
+            return \Auth::user()->id;
+        } else{
+            return null;
+        }
+    }
 }

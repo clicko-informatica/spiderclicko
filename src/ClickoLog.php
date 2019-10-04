@@ -40,7 +40,7 @@ class ClickoLog
             $spiderClickoCredentials->save();
         }
 
-        $user= \Auth::check() ? \Auth::user()->id : null;
+        $user= $spiderClickoCredentials->getNameUser();
 
         if (!$clickoLogApi->saveLog(['user' => $user, 'payload' => $payload, 'type' => $type], $spiderClickoCredentials->access_token)){
             logger('Error al guardar el Clicko Log.');
