@@ -30,7 +30,7 @@ Opcionalmente podemos usar la facade para un código más corto. Añade esto a t
 
     'ClickoLog' => Clicko\SpiderClicko\ClickoLogFacade::class,
     
-Una vez cargada la base de datos utilizamos el comando install del paquete con sus opciones correspondientes
+Una vez cargada la base de datos utilizamos el comando install del paquete con sus opciones correspondientes (PassPhrase = Contraseña Keepas)
 
     $ php artisan spiderclicko:install --user= --pass= --passphrase=
     
