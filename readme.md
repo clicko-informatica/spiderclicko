@@ -17,7 +17,11 @@ Después de actualizar composer, hacemos una migración para cargar la base de d
 Si ya hay una base de datos podemos llamar directamente a la migración para que haga la tabla nueva
     
     $ art migrate --path=/vendor/clicko/spiderclicko/src/migrations/
-    
+
+Publicamos el archivo spoderclicko en la carpeta config mediante la consulta (Seleccionando SpiderClickoServiceProvider):
+
+    $ art vendor:publish
+
 Agregamos el ServiceProvider a la matriz de proveedores en config / app.php
 
     Clicko\SpiderClicko\SpiderClickoServiceProvider::class,

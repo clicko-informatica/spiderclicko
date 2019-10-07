@@ -3,6 +3,7 @@
 namespace Clicko\SpiderClicko;
 
 use Exception;
+use Illuminate\Support\Arr;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class ClickoExceptionHandler extends ExceptionHandler
@@ -34,7 +35,7 @@ class ClickoExceptionHandler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
-        if (!$this->isHttpException($exception)){
+        if (!$this->noDebeInformar($exception)){
             try{
                 ClickoLog::exception($exception);
             } catch (Exception $exception){
@@ -56,5 +57,20 @@ class ClickoExceptionHandler extends ExceptionHandler
     public function render($request, Exception $exception)
     {
         return parent::render($request, $exception);
+    }
+
+    /**
+     * Determina si la excepción está en la lista "no informar".
+     *
+     * @param  \Exception  $e
+     * @return bool
+     */
+    public function noDebeInformar(Exception $e)
+    {
+        $noInformar = config('spiderclicko.noInformar');
+
+        return ! is_null(Arr::first($noInformar, function ($tipo) use ($e) {
+            return $e instanceof $tipo;
+        }));
     }
 }
